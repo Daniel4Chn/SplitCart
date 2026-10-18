@@ -1,8 +1,8 @@
 # SplitCart operator runbook — M7 / DB-07 / N-02..07
 
-Local operational checks exist. Hosted deployment is not verified. No provider or paid resources have been selected or provisioned.
+Local and Railway operational checks exist. Railway deployment was explicitly authorized on 2026-10-18; hosted synthetic OCR, restart and isolated restore are verified. Real Google session/physical-device/corpus/retention acceptance remains open.
 
-Update 2026-10-18: user selected Railway on the existing Hobby account and authorized deployment. Project `SplitCart` contains one application service, private PostgreSQL 15, and persistent application/database volumes. Deployment/host checks are in progress; exact executed results are recorded in implementation-log.md rather than inferred from provisioning. The original gate descriptions below remain the acceptance checklist.
+Update 2026-10-18: user selected Railway on the existing Hobby account and authorized deployment. Project `SplitCart` contains one application service, private PostgreSQL 15, and persistent application/database volumes. Executed results are recorded in implementation-log.md rather than inferred from provisioning. Older checklist wording below describes the original requirements; current evidence supersedes historical unrun statuses.
 
 ## Railway operations
 
@@ -11,6 +11,8 @@ Application URL: https://splitcart-production.up.railway.app. PostgreSQL is priv
 Use the existing Git-ignored local environment only for development. Production credentials belong in Railway variables; never run raw variable-list commands in shared logs. Configure Google's exact hosted callback `/api/auth/callback/google` and keep development redirect URIs separately. A recognized provider and Google authorization redirect do not prove completed login/logout.
 
 Deploy project source with `railway up --service splitcart --detach`. The upload honors `.gitignore`; do not use `--no-gitignore`. Confirm deployment status and health before reporting success. Railway currently warns that railway.json is supported only until 2026-12-01; migration to the reviewed infrastructure-as-code format is required before that date. Dry-run migration was inspected, not applied.
+
+GitHub auto-deploy is not connected: Railway rejected source connection to the private repository for lack of repository access. Grant its GitHub integration access to `Daniel4Chn/SplitCart` before claiming push-to-deploy behavior. The current deployment uses CLI upload; GitHub source remains private. The initial runtime database role owns the schema; least-privilege runtime/operator separation is a remaining hardening task. No spending cap, automatic off-host backups or expiry is configured.
 
 Operator checks inside the application container (run as node): `npm run doctor`; `npx tsx scripts/host-smoke.ts create`; restart the app service; `npx tsx scripts/host-smoke.ts verify`. The smoke uses only a generated receipt/test owner, preserves its original/snapshot through restart, and then deletes its synthetic data. Do not use the real Google owner as a test identity. `npm run ops:backup` and isolated restore remain separate recovery checks. A backup on the application volume is not off-host protection; no configured expiry, automated off-host copies, or fixed recovery objective is implied.
 

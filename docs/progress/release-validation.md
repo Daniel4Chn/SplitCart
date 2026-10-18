@@ -1,5 +1,13 @@
 # M7 release validation
 
+## Hosted update — 2026-10-18
+
+User authorized deployment using the existing Railway Hobby account. https://splitcart-production.up.railway.app is live with one app service, private PostgreSQL 15, and persistent app/database volumes. Docker build/migrations/readiness, HTTPS home/health, signed-out API isolation, configured Google provider and authorization redirect passed. Hosted 31 TypeScript tests/8 files and 9 Python tests passed. Synthetic native camera-independent OCR/service review/finalization preserved 600 cents and original bytes; actual service restart preserved its snapshot ID/image, then cleaned synthetic live data. Backup/isolated restore verified 1 receipt, 1 finalization and 1 image with hashes/reference/share checks.
+
+Real Google consent/session login/logout, physical-phone capture, real corpus/holdout/correction burden/usefulness, resource-pressure checks, automatic off-host backup/retention and runtime DB role hardening remain open. GitHub source access for Railway auto-deploy was rejected; CLI upload is working. Historical unrun host statements below describe the prior 2026-10-17 state. This is a hosted demo, not completed release acceptance.
+
+Remote GitHub Actions run 39096581982 also completed successfully for deployment-preparation commit 7c7464a (migrations, typecheck, TS/Python/browser checks and production build). Earlier remote-CI-unrun statements below are historical.
+
 Status: **not released; external release gates open**. User authorized all independent M0–M7 implementation, but did not supply a target host, paid-service budget, OAuth credentials, or real receipt corpus. No infrastructure provisioned or external messages sent.
 
 Local evidence as of 2026-10-17:

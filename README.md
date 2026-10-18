@@ -1,5 +1,9 @@
 # SplitCart
 
+Hosted demo: **https://splitcart-production.up.railway.app**. Railway runs the application/native OCR, private PostgreSQL, and persistent receipt storage. HTTPS/auth redirect, hosted synthetic OCR, 31 TypeScript tests, 9 Python tests, restart and isolated backup restore passed on 2026-10-18. Completed Google consent/session login/logout, real-phone capture and real-receipt accuracy remain unverified. See [deployment details](docs/operations/deployment-plan.md) and the [runbook](docs/operations/runbook.md). Google must allow the hosted origin and exact `/api/auth/callback/google` URL.
+
+The [remote GitHub Actions checks](https://github.com/Daniel4Chn/SplitCart/actions/runs/39096581982) also passed. Railway GitHub auto-deploy still needs its integration granted access to this private repository; deployments currently use the CLI.
+
 Approved M0–M7 implementation in progress. A local camera and simple manual household workflow now works: create roommate labels, take a receipt photo directly or add items and costs manually, automatically populate a review draft from OCR, assign integer ratios, preview exact allocations, finalize an immutable split, and reopen history. Every monetary calculation uses integer cents/BigInt and deterministic largest-remainder rounding. No real-receipt accuracy or hosted release claim is made.
 
 ## Local setup
@@ -50,7 +54,7 @@ OCR is an untrusted suggestion; import is explicit and cannot silently overwrite
 
 ## Remaining release gates
 
-A consented redacted real receipt corpus with independently checked ground truth; locked holdout evaluation and observed correction burden; Google OAuth credentials/real-provider verification; approved host/budget, HTTPS, backup retention and target-host native/recovery checks; explicit evidence-backed OCR usefulness approval. No paid infrastructure has been provisioned. M4/M6/M7 cannot be called complete while these checks remain unrun. Independent local work continues under the approved architecture: Next.js, PostgreSQL and bounded local Python/OpenCV/Tesseract; no FastAPI or separate OCR service.
+A consented redacted real receipt corpus with independently checked ground truth; locked holdout evaluation and observed correction burden; completed real Google login/logout and physical-phone verification; off-host backup/retention policy, resource-pressure validation and operational hardening; explicit evidence-backed OCR usefulness approval. User-authorized Railway infrastructure is provisioned; HTTPS/native smoke/restart/restore checks pass. M4/M6/M7 cannot be called complete while remaining checks are unrun. Architecture remains Next.js, PostgreSQL and bounded local Python/OpenCV/Tesseract; no FastAPI or separate OCR service.
 
 Camera opens inside the page and requires browser permission (localhost or HTTPS). Take the photo and extraction starts automatically. Manual entry supports groceries/household items with item name, cost and sharing choices; no separate receipt-total input. See ADR-003 for the user-directed redesign.
 

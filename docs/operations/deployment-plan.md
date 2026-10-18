@@ -1,6 +1,6 @@
 # M7 deployment proposal — Vercel and Railway
 
-Prepared 2026-10-18; user subsequently requested deployment on the existing Railway Hobby account. The Railway-only topology below is selected and provisioning is underway. This preserves ADR-001. The alternative Vercel split remains unselected; see the implementation log for executed deployment results.
+Prepared 2026-10-18; user subsequently requested deployment on the existing Railway Hobby account. The Railway-only topology below is deployed and passes the hosted checks recorded in the implementation log. This preserves ADR-001. The alternative Vercel split remains unselected. Host setup is not equivalent to full corpus/provider/usefulness release acceptance.
 
 ## Recommended: complete application on Railway
 

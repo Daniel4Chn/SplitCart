@@ -1,5 +1,11 @@
 # Acceptance and testing strategy
 
+## Railway evidence update — 2026-10-18 / M6–M7
+
+On the user-authorized Railway host, Docker build, checksum migrations 001–004, private volume permissions/nonroot application startup, DB/native readiness, HTTPS homepage/health, signed-out receipt API 401 and Google authorization redirect/state/callback checks pass. Hosted `npm test`: 31/8 files; hosted unittest: 9. Supervised worker fault/descendant tests pass on Linux. `host-smoke.ts create` produced two synthetic OCR items, reviewed source-linked draft, exact 600-cent finalized snapshot and byte-identical private original. Actual service restart plus `verify` preserved finalization ID/snapshot/image and removed synthetic live data. Hosted backup restored into an independent database: 1 receipt, 1 finalization, 1 image; original/display hashes/references and exact shares verified.
+
+These close the listed hosted smoke/recovery checks only. They do not prove completed Google login/logout, physical-phone behavior, real OCR quality/holdout/usefulness, resource-pressure resilience, complete authorization-path coverage, scheduled off-host backups/expiry, or least-privilege DB role deployment. GitHub auto-deploy is not connected; remote CI status is recorded separately. No full M7 or security-compliance claim.
+
 Status: specifications approved; automated tests now run. Executed evidence is recorded below and in the implementation log. Real-receipt OCR measurements remain unavailable.
 
 ## Test layers and tooling
