@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "description": "Template only. No real receipts collected.",
+  "receipts": [],
+  "requiredFields": [
+    "id",
+    "receiptGroupId",
+    "split",
+    "store",
+    "quality",
+    "consent",
+    "image",
+    "groundTruth"
+  ],
+  "splits": [
+    "development",
+    "holdout"
+  ],
+  "quality": [
+    "clear",
+    "skewed",
+    "faded-glare",
+    "cropped-blurred"
+  ]
+}
