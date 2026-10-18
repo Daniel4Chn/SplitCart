@@ -1,5 +1,15 @@
 # Implementation log
 
+## 2026-10-18 — M6/M7 Google configuration and authorized Railway deployment
+
+User supplied Google credentials in ignored `.env.local`, then explicitly requested deployment using the existing Railway Hobby account. Development auth disabled locally; live local provider listing recognizes Google, sign-in POST redirects to accounts.google.com with the configured loopback callback/state, and signed-out household API returns 401. These checks do not prove completed real-provider consent/session behavior.
+
+Selected the existing ADR-001 topology: one Docker application service with local Python/OpenCV/Tesseract, PostgreSQL 15 on Railway private networking, persistent DB volume, and private application volume. Created only the SplitCart project/services in the user's personal workspace. Required credentials transmitted through CLI stdin, not echoed, committed, or passed in shell arguments; production session secret newly generated. No local receipts/database transferred. Hosted URL reserved: https://splitcart-production.up.railway.app. User asked to add the exact hosted Google origin/callback; completion remains pending.
+
+Added container entrypoint (initialize mounted root, drop to node via gosu), tini descendant reaping, production startup configuration/HTTPS/bypass guards, migrations/recovery/readiness before traffic, single-flight periodic maintenance with deadline, Railway build/health configuration, and synthetic hosted OCR/restart acceptance tooling. Explicit service/environment UUIDs work around an installed CLI volume-command panic when resolving selectors implicitly. Railway warns config-as-code remains supported until 2026-12-01; migrate configuration before that date. No native host/restore claim until executed outcomes below.
+
+Current local checks: typecheck, 31 TypeScript tests, 9 Python tests, shell/Node syntax, and production startup guard probes passed. Hosted build/acceptance results will be recorded after execution. Real receipt corpus, independently checked truth, holdout/correction burden, real phone/provider verification, and off-host retention gates remain open; no blanket M0–M7 completion claim.
+
 ## 2026-10-16 — Planning draft
 
 Authorization: repository inspection and specification creation only. Application implementation is not approved.

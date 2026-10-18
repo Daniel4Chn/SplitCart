@@ -11,7 +11,7 @@ Status: specifications approved; autonomous M0–M7 implementation authorized. L
 | M4 | Receipt parser and measured OCR baseline | M3 | 3–5 days | Parser/evaluator implemented; real corpus acceptance blocked |
 | M5 | Integrated image review/correction workflow | M4 | 2–4 days | Local photo/correction/deletion checks passing; M4 quality gate open |
 | M6 | Hosted organizer authentication and owner isolation | M5 | 2–3 days | Owner/CSRF/production checks passing; real Google login unverified |
-| M7 | Deployment, recovery, holdout/user validation, release gate | M6 | 2–4 days | Backup/restore/restart tooling validated locally; host/usefulness gates open |
+| M7 | Deployment, recovery, holdout/user validation, release gate | M6 | 2–4 days | Railway deployment authorized and in progress; corpus/usefulness gates remain open |
 
 Total: approximately 17–30 focused engineering days, plus contingency of 20–30% (roughly 21–39 days total). These are planning estimates, not measured AI productivity. Part-time calendar time depends on availability. Receipt collection, OAuth configuration, feedback, approval, and host access can extend elapsed time. No hosting price estimate without provider/budget selection.
 

@@ -2,6 +2,18 @@
 
 Local operational checks exist. Hosted deployment is not verified. No provider or paid resources have been selected or provisioned.
 
+Update 2026-10-18: user selected Railway on the existing Hobby account and authorized deployment. Project `SplitCart` contains one application service, private PostgreSQL 15, and persistent application/database volumes. Deployment/host checks are in progress; exact executed results are recorded in implementation-log.md rather than inferred from provisioning. The original gate descriptions below remain the acceptance checklist.
+
+## Railway operations
+
+Application URL: https://splitcart-production.up.railway.app. PostgreSQL is private; do not expose a public database TCP proxy. Application volume mounts `/app/.data`; database volume mounts `/var/lib/postgresql/data`. The container initializes only the mounted application root, drops to `node` via gosu, and uses tini to reap orphan processes. Startup refuses missing production configuration, development bypass, or a non-HTTPS auth origin; it applies checksum migrations, sweeps recovery/deletions, and probes DB/native binaries before serving. Maintenance runs single-flight every minute with a 45-second deadline.
+
+Use the existing Git-ignored local environment only for development. Production credentials belong in Railway variables; never run raw variable-list commands in shared logs. Configure Google's exact hosted callback `/api/auth/callback/google` and keep development redirect URIs separately. A recognized provider and Google authorization redirect do not prove completed login/logout.
+
+Deploy project source with `railway up --service splitcart --detach`. The upload honors `.gitignore`; do not use `--no-gitignore`. Confirm deployment status and health before reporting success. Railway currently warns that railway.json is supported only until 2026-12-01; migration to the reviewed infrastructure-as-code format is required before that date. Dry-run migration was inspected, not applied.
+
+Operator checks inside the application container (run as node): `npm run doctor`; `npx tsx scripts/host-smoke.ts create`; restart the app service; `npx tsx scripts/host-smoke.ts verify`. The smoke uses only a generated receipt/test owner, preserves its original/snapshot through restart, and then deletes its synthetic data. Do not use the real Google owner as a test identity. `npm run ops:backup` and isolated restore remain separate recovery checks. A backup on the application volume is not off-host protection; no configured expiry, automated off-host copies, or fixed recovery objective is implied.
+
 ## Setup and secrets
 
 See README for native local setup. Production needs Google OAuth client/secret, NEXTAUTH_SECRET, DATABASE_URL, and NEXTAUTH_URL at the actual HTTPS origin. Use provider redirect `/api/auth/callback/google`. Keep secrets in host environment; never bake `.env.local` into an image. Set SPLITCART_DEV_AUTH=0. Production build/start refuses the development bypass. Development household data is never transferred to a new OAuth account.
